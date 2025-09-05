@@ -20,3 +20,9 @@ vector_store = LangchainPinecone.from_existing_index(
     index_name=index_name,
     embedding=embeddings
 )
+
+def build_retriever(chat_args):
+    search_kwargs = {"filter": {"pdf_id": chat_args.pdf_id}}
+    return vector_store.as_retriever(
+        search_kwargs=search_kwargs
+    )
